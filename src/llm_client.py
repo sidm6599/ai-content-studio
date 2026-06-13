@@ -43,6 +43,8 @@ class LLMClient:
         # graceful fallbacks
         if self.provider == "gemini" and self.config.openrouter_api_key:
             chain.append("openrouter")
+        if self.provider in ("gemini", "openrouter") and self.config.nvidia_api_key:
+            chain.append("nvidia")
         chain.append("mock")
         return chain
 
@@ -77,6 +79,25 @@ class LLMClient:
             "messages": [{"role": "user", "content": prompt}],
         }
         r = requests.post(url, json=payload, headers=headers, timeout=30)
+        r.raise_for_status()
+        return r.json()["choices"][0]["message"]["content"]
+
+    def _call_nvidia(self, prompt: str) -> str:
+        """NVIDIA NIM — OpenAI-compatible chat completions."""
+        if not self.config.nvidia_api_key:
+            raise LLMError("No NVIDIA key")
+        url = "https://integrate.api.nvidia.com/v1/chat/completions"
+        headers = {"Authorization": f"Bearer {self.config.nvidia_api_key}"}
+        payload = {
+            "model": self.config.nvidia_model,
+            "temperature": self.config.temperature,
+            "messages": [
+                {"role": "system",
+                 "content": "You output only valid JSON, no markdown fences."},
+                {"role": "user", "content": prompt},
+            ],
+        }
+        r = requests.post(url, json=payload, headers=headers, timeout=60)
         r.raise_for_status()
         return r.json()["choices"][0]["message"]["content"]
 

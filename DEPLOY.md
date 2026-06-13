@@ -36,6 +36,7 @@ Go to your Space → **Settings** → **Repository secrets** and add:
 |----------------------|-----------|----------------------------------------------|
 | `GEMINI_API_KEY`     | Optional  | Live generation via Google Gemini            |
 | `OPENROUTER_API_KEY` | Optional  | Fallback live generation via OpenRouter      |
+| `NVIDIA_API_KEY`     | Optional  | Live generation via NVIDIA NIM (OpenAI-compatible) |
 | `SUPABASE_URL`       | Optional  | Persistent history + pgvector brand examples |
 | `SUPABASE_KEY`       | Optional  | Supabase service-role or anon key            |
 

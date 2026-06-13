@@ -13,11 +13,13 @@ except Exception:  # python-dotenv optional
 
 @dataclass
 class Config:
-    provider: str = "auto"          # auto | gemini | openrouter | mock
+    provider: str = "auto"          # auto | gemini | openrouter | nvidia | mock
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.0-flash"
     openrouter_api_key: str = ""
     openrouter_model: str = "meta-llama/llama-3.1-8b-instruct"
+    nvidia_api_key: str = ""
+    nvidia_model: str = "meta/llama-3.3-70b-instruct"
     temperature: float = 0.7
     max_generations: int = 5
     embed_model: str = "all-MiniLM-L6-v2"
@@ -37,6 +39,8 @@ class Config:
             gemini_model=_f("GEMINI_MODEL", "gemini-2.0-flash"),
             openrouter_api_key=_f("OPENROUTER_API_KEY", ""),
             openrouter_model=_f("OPENROUTER_MODEL", "meta-llama/llama-3.1-8b-instruct"),
+            nvidia_api_key=_f("NVIDIA_API_KEY", ""),
+            nvidia_model=_f("NVIDIA_MODEL", "meta/llama-3.3-70b-instruct"),
             temperature=float(_f("TEMPERATURE", "0.7")),
             max_generations=int(_f("MAX_GENERATIONS", "5")),
             embed_model=_f("EMBED_MODEL", "all-MiniLM-L6-v2"),
@@ -54,7 +58,7 @@ class Config:
             raise ValueError("TEMPERATURE must be between 0 and 1")
         if not 1 <= self.max_generations <= 10:
             raise ValueError("MAX_GENERATIONS must be between 1 and 10")
-        if self.provider not in {"auto", "gemini", "openrouter", "mock"}:
+        if self.provider not in {"auto", "gemini", "openrouter", "nvidia", "mock"}:
             raise ValueError(f"Unknown provider: {self.provider}")
 
     def resolved_provider(self) -> str:
@@ -65,4 +69,6 @@ class Config:
             return "gemini"
         if self.openrouter_api_key:
             return "openrouter"
+        if self.nvidia_api_key:
+            return "nvidia"
         return "mock"

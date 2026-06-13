@@ -22,6 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
 _CRED_VARS = (
     "GEMINI_API_KEY",
     "OPENROUTER_API_KEY",
+    "NVIDIA_API_KEY",
     "SUPABASE_URL",
     "SUPABASE_KEY",
     "LLM_PROVIDER",

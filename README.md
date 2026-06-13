@@ -59,8 +59,9 @@ app.py (Streamlit)
 Without these, the app keeps working with in-memory history.
 
 ## 🔌 Configuration
-All via `.env` (see `.env.example`). With no keys it runs in **mock** mode; add
-`GEMINI_API_KEY` or `OPENROUTER_API_KEY` for live generation.
+All via `.env` (see `.env.example`). With no keys it runs in **mock** mode. Add any one of
+`GEMINI_API_KEY`, `OPENROUTER_API_KEY`, or `NVIDIA_API_KEY` (NVIDIA NIM, OpenAI-compatible)
+for live generation — the client auto-selects and falls back gracefully.
 
 ## 🚀 Deploy
 
