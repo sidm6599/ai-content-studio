@@ -20,8 +20,8 @@ on:
 
 # ── CONFIGURE THESE TWO VALUES ────────────────────────────────────────────────
 env:
-  HF_USERNAME: YOUR_HF_USERNAME   # e.g. siddhesh
-  HF_SPACE: YOUR_HF_SPACE_NAME    # e.g. ai-content-studio
+  HF_USERNAME: YOUR_HF_USERNAME   # <-- set this to your Hugging Face username
+  HF_SPACE: ai-content-studio     # pre-filled to match the repo; change if your Space differs
 # ─────────────────────────────────────────────────────────────────────────────
 
 jobs:
