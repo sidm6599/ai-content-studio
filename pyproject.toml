@@ -1,0 +1,15 @@
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# E = pycodestyle errors, F = pyflakes, W = pycodestyle warnings, I = isort
+select = ["E", "F", "W", "I"]
+# Keep it permissive — don't fight existing code style
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+# Allow unused imports in __init__.py (common for re-exports)
+"__init__.py" = ["F401"]
+# Relax tests: allow unused imports, star imports, assert statements, etc.
+"tests/*" = ["F401", "F811", "F841"]

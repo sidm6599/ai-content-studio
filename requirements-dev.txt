@@ -1,0 +1,14 @@
+# Full development + CI dependencies.
+# Install with: pip install -r requirements-dev.txt
+-r requirements.txt
+
+# Test runner and linter
+pytest>=7.4.0
+ruff>=0.3.0
+
+# ChromaDB vector backend (for local/CI testing of the chromadb store)
+chromadb>=0.4.22
+
+# Optional: real sentence-transformer embeddings (large download ~90 MB).
+# Uncomment to enable locally; not required for the offline test suite.
+# sentence-transformers>=2.3.0

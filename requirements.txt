@@ -1,0 +1,7 @@
+# Runtime dependencies installed by Hugging Face Spaces.
+# Heavy optional libs (chromadb, sentence-transformers) are intentionally
+# excluded — the app degrades gracefully to in-memory RAG and TF-IDF embeddings.
+streamlit>=1.39.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+supabase>=2.4.0

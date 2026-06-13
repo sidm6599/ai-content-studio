@@ -1,0 +1,13 @@
+[server]
+# Required for Hugging Face Spaces (and any containerised deployment).
+# HF sets the port via $PORT; do NOT hardcode port here.
+headless = true
+enableCORS = false
+
+[theme]
+# Indigo → purple brand palette matching the HF Space card.
+primaryColor = "#6366f1"
+backgroundColor = "#0f0f1a"
+secondaryBackgroundColor = "#1e1e3a"
+textColor = "#e2e8f0"
+font = "sans serif"
