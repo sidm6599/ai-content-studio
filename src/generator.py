@@ -23,6 +23,11 @@ class ContentRequest:
     tone: str = "neutral"
     num_items: int = 3
     use_rag: bool = True
+    # Multimodal image input (optional)
+    image_bytes: bytes | None = None
+    image_mime: str = "image/png"
+    # Localisation (optional; empty / "English" → no extra instruction)
+    language: str = "English"
 
 
 @dataclass
@@ -67,6 +72,9 @@ class ContentGenerator:
             f"{req.num_items} objects, each with keys: "
             f"{', '.join(domain.output_fields)}."
         )
+        lang = (req.language or "").strip()
+        if lang and lang.lower() != "english":
+            lines.append(f"Write ALL output in {lang}.")
         return "\n".join(lines)
 
     # ---- main entry ---------------------------------------------------
@@ -74,7 +82,11 @@ class ContentGenerator:
         domain = get_domain(req.domain)
         context, brand_examples = self._retrieve(req)
         prompt = self.build_prompt(req, domain, context)
-        raw = self.client.generate(prompt)
+        raw = self.client.generate(
+            prompt,
+            image_bytes=req.image_bytes,
+            image_mime=req.image_mime,
+        )
         items = self._parse(raw, domain)
         # score brand match against retrieved/brand examples
         if brand_examples:

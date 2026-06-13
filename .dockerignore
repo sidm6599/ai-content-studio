@@ -1,0 +1,39 @@
+# --- Secrets (NEVER bake into the image) ---
+.env
+.env.*
+
+# --- Python artifacts ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtual environments ---
+venv/
+.venv/
+env/
+
+# --- Test & lint caches ---
+.pytest_cache/
+.ruff_cache/
+tests/
+
+# --- Version control ---
+.git/
+.gitignore
+
+# --- Local vector / chroma data (rebuilt at runtime or mounted as a volume) ---
+chroma_db/
+
+# --- Editor / OS ---
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# --- Documentation (not needed at runtime) ---
+*.md
+LICENSE
+
+# NOTE: knowledge/ is intentionally NOT excluded — the app seeds its
+# in-memory vector store from knowledge/examples.json at startup.

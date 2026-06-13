@@ -22,12 +22,15 @@ Built by **Siddhesh Mishra** as an original project (architecture inspired by, b
 
 ## ✨ Highlights
 - **6 pluggable domains** (social / product / email / resume / blog / video) — adding one is a single `Domain` entry.
+- **Multimodal** — optionally upload an image; vision-capable models (Gemini / NVIDIA VLM) factor it into the content.
+- **8-language localization** — generate in English, German, Hindi, Spanish, French, and more.
 - **Tone presets** and an **engagement predictor** (scikit-learn with heuristic fallback) scoring each variation low/medium/high.
 - **Multi-format export** — download as JSON, CSV, or Markdown.
+- See real outputs in [`SAMPLES.md`](SAMPLES.md), or run `python scripts/generate_samples.py`.
 - **RAG** over brand examples — **in-memory**, **Supabase pgvector**, or **ChromaDB** backends (graceful fallback).
 - **Brand-voice match score** via sentence-transformer embeddings (cosine to brand examples).
 - **RAG vs No-RAG** side-by-side — the evaluation pattern from my MSc dissertation.
-- **Multi-LLM with fallback**: Gemini → OpenRouter (Llama) → offline **mock** so it always runs.
+- **Multi-LLM with fallback**: Gemini → OpenRouter → **NVIDIA NIM** → offline **mock** so it always runs.
 - **Persistent memory via Supabase** (Postgres + pgvector): saves generation **history** and brand examples so it **doesn't forget** across sessions — with graceful in-memory fallback when no DB is configured.
 - **Export** (JSON), **history**, and per-channel **length checks** (e.g. X/Twitter 280).
 - **Runs with zero API keys** (mock mode) — perfect for demos and CI.

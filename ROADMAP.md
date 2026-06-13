@@ -63,11 +63,17 @@ pytest -q                     # run the test suite
 - ✅ **Multi-format export** — `src/exporters.py` (JSON / CSV / Markdown) → three download buttons.
 - Test count: **103 passing, 4 skipped** (chromadb-only).
 
-## Domain-expansion ideas (still open)
-- **Localization** — generate in multiple languages (you study German).
-- **Image input** — multimodal captions (Gemini vision) like the reference.
+## Build wave 2 (2026-06-14) — shipped
+- ✅ **NVIDIA NIM provider** (live, `meta/llama-3.3-70b-instruct`) + vision models verified.
+- ✅ **Multimodal image input** — upload an image; Gemini/NVIDIA VLM factor it in.
+- ✅ **8-language localization** (`src/i18n.py`) — English/German/Hindi/Spanish/French/…
+- ✅ **Sample gallery** — `scripts/generate_samples.py` → `SAMPLES.md` (live-generated).
+- ✅ **Docker** — `Dockerfile` + `.dockerignore` (HF Docker-Spaces option included).
+
+## Still open (nice-to-have)
 - **Brand kits** — save per-brand voice + examples; switch between clients.
-- **pgvector activation** — `pip install sentence-transformers` + re-seed for real embeddings.
+- **pgvector activation** — `pip install sentence-transformers` + re-seed Supabase for real embeddings (currently local-cosine fallback).
+- **Deploy** — push to GitHub + create the HF Space (needs your accounts).
 
 ## Resume bullet (fill in once deployed)
 > "Built **AI Content Studio**, a multi-domain RAG content generator (Streamlit, ChromaDB, sentence-transformers, multi-provider LLM with Gemini/Llama fallback): added an embeddings-based **brand-voice match score** and a **RAG vs No-RAG** comparison, covered by a **pytest** suite and CI, deployed live at <link>."

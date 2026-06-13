@@ -16,6 +16,7 @@ from src.db import get_history_store
 from src.domains import list_domains, list_tones
 from src.engagement import predict_engagement
 from src.generator import ContentGenerator, ContentRequest
+from src.i18n import list_languages
 from src.vector_store import get_vector_store
 
 st.set_page_config(page_title="AI Content Studio", page_icon="✍️", layout="wide")
@@ -65,9 +66,12 @@ col1, col2 = st.columns([3, 1])
 with col1:
     topic = st.text_area("What's it about?",
                          placeholder="e.g. New AI-powered smartwatch with health tracking")
+    uploaded = st.file_uploader("Optional image (analyzed by vision models)",
+                                type=["png", "jpg", "jpeg", "webp"])
 with col2:
     channel = st.selectbox("Channel", domain.channels or ["Generic"])
     tone = st.selectbox("Tone", list_tones())
+    language = st.selectbox("Language", list_languages())
 
 
 def _render_item(i, item, limit):
@@ -97,8 +101,11 @@ if st.button("🎨 Generate", type="primary", use_container_width=True):
         st.warning("Add a topic first.")
     else:
         limit = domain.char_limits.get(channel)
+        img_bytes = uploaded.getvalue() if uploaded else None
+        img_mime = uploaded.type if uploaded else "image/png"
         base = dict(domain=domain.key, topic=topic, channel=channel,
-                    tone=tone, num_items=num_items)
+                    tone=tone, language=language, num_items=num_items,
+                    image_bytes=img_bytes, image_mime=img_mime)
         if compare:
             c1, c2 = st.columns(2)
             with c1:
