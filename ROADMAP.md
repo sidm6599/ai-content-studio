@@ -27,7 +27,9 @@ ContentGenerator (src/generator.py)
 | 4 | RAG vector store: in-memory + **Supabase pgvector** (+ ChromaDB stub) | ✅ memory + Supabase done |
 | 5 | UI polish: export (json), history, length rules | ✅ core done |
 | 6 | **Persistence: Supabase** — history + brand examples (won't forget) | ✅ done (graceful offline fallback) |
-| 7 | Tests (pytest) + CI + deploy (Streamlit Cloud / HF Spaces) | ✅ 18 tests + CI; deploy = TODO |
+| 7 | Tests (pytest) + CI + deploy (HF Spaces) | ✅ **125 tests, ruff-clean, GitHub Actions CI + CD, HF deploy config — DEPLOY-READY** |
+
+> **Status: deploy-ready.** Git initialised with an initial commit. To go live: push to GitHub (CI runs automatically) and create a Hugging Face Streamlit Space — see [`DEPLOY.md`](DEPLOY.md).
 
 ### Supabase persistence (the "don't forget" layer)
 - Run `supabase/schema.sql` once in the Supabase SQL editor → creates `generations`, `brand_examples`, a pgvector index, and the `match_brand_examples` RPC.
