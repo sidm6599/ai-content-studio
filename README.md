@@ -50,7 +50,7 @@ app.py (Streamlit)
   ├── ContentGenerator (src/generator.py)
   │     ├── DomainRegistry  (src/domains.py)      prompt templates per domain
   │     ├── VectorStore     (src/vector_store.py) RAG retrieval (memory | supabase | chromadb)
-  │     ├── LLMClient       (src/llm_client.py)   gemini → openrouter → mock
+  │     ├── LLMClient       (src/llm_client.py)   gemini → openrouter → nvidia → mock
   │     └── Quality         (src/quality.py)      brand-match, rag-vs-norag
   └── Persistence      (src/db.py)                Supabase history + pgvector (or in-memory)
 ```
@@ -73,7 +73,7 @@ Step-by-step instructions for deploying to **Hugging Face Spaces** or **GitHub**
 The lean [`requirements.txt`](requirements.txt) (4 runtime deps, no heavy ML libs) is what HF Spaces installs. For local dev with ChromaDB and the full test suite, use [`requirements-dev.txt`](requirements-dev.txt).
 
 ## 🗺️ Roadmap
-See [`ROADMAP.md`](ROADMAP.md). Done: 6 domains, 3 RAG backends (memory / Supabase pgvector / ChromaDB), engagement scoring, multi-format export, GitHub Actions CI, and HF-Spaces deploy config. Next up: multimodal image input and localization.
+See [`ROADMAP.md`](ROADMAP.md). Done: 6 domains, **multimodal image input**, **8-language localization**, 3 RAG backends (memory / Supabase pgvector / ChromaDB), engagement scoring, multi-format export, NVIDIA/Gemini/OpenRouter providers, Supabase persistence, GitHub Actions CI/CD, and a **live Hugging Face deployment**. Next up: brand kits and a demo GIF.
 
 ## 🧪 Tests
 `pytest -q` — the suite is fully offline (mock provider + TF-cosine fallback), so it
