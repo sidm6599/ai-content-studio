@@ -1,15 +1,15 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# Deploy to Hugging Face Spaces
+# Deploy to Hugging Face Spaces (Streamlit SDK)
 #
-# ONE-TIME SETUP (do this before the first push to main):
-#   1. Create a Hugging Face Space at https://huggingface.co/new-space
-#      and choose "Streamlit" as the SDK.
-#   2. GitHub repo → Settings → Secrets and variables → Actions → New repository
-#      secret named HF_TOKEN (a HF write token from
-#      https://huggingface.co/settings/tokens).
-#   3. Set HF_USERNAME below to your Hugging Face username (HF_SPACE is pre-filled).
+# ONE-TIME SETUP:
+#   1. Create a Hugging Face *Streamlit* Space named "ai-content-studio".
+#   2. GitHub repo → Settings → Secrets and variables → Actions → add a secret
+#      HF_TOKEN  (a HF *write* token from https://huggingface.co/settings/tokens).
+#   3. In the HF Space → Settings → Variables and secrets, add NVIDIA_API_KEY
+#      (and optionally SUPABASE_URL / SUPABASE_KEY / GEMINI_API_KEY).
 #
 # Until HF_TOKEN is set, the deploy step is SKIPPED and this workflow stays green.
+# Trigger manually from the Actions tab (workflow_dispatch) or on push to main.
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Deploy to Hugging Face Spaces
@@ -18,6 +18,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -25,10 +26,10 @@ jobs:
     env:
       # secrets can't be used in `if:` directly, so route HF_TOKEN through env.
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      HF_USERNAME: YOUR_HF_USERNAME   # <-- set to your Hugging Face username
-      HF_SPACE: ai-content-studio     # pre-filled to match the repo
+      HF_USERNAME: sidmishra6895
+      HF_SPACE: ai-content-studio
     steps:
-      - name: Checkout repository (full history for git push)
+      - name: Checkout repository (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -37,6 +38,7 @@ jobs:
         # Runs only once HF_TOKEN has been configured as a repo secret.
         if: ${{ env.HF_TOKEN != '' }}
         run: |
-          git push \
-            "https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}" \
-            main
+          # Force-push the repo to the Space, overwriting HF's default template.
+          git push --force \
+            "https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}.git" \
+            HEAD:main
