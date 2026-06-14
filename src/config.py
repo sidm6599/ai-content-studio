@@ -19,7 +19,7 @@ class Config:
     openrouter_api_key: str = ""
     openrouter_model: str = "meta-llama/llama-3.1-8b-instruct"
     nvidia_api_key: str = ""
-    nvidia_model: str = "meta/llama-3.3-70b-instruct"
+    nvidia_model: str = "meta/llama-3.2-1b-instruct"
     temperature: float = 0.7
     max_generations: int = 5
     embed_model: str = "all-MiniLM-L6-v2"
@@ -40,7 +40,7 @@ class Config:
             openrouter_api_key=_f("OPENROUTER_API_KEY", ""),
             openrouter_model=_f("OPENROUTER_MODEL", "meta-llama/llama-3.1-8b-instruct"),
             nvidia_api_key=_f("NVIDIA_API_KEY", ""),
-            nvidia_model=_f("NVIDIA_MODEL", "meta/llama-3.3-70b-instruct"),
+            nvidia_model=_f("NVIDIA_MODEL", "meta/llama-3.2-1b-instruct"),
             temperature=float(_f("TEMPERATURE", "0.7")),
             max_generations=int(_f("MAX_GENERATIONS", "5")),
             embed_model=_f("EMBED_MODEL", "all-MiniLM-L6-v2"),
