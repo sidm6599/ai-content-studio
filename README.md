@@ -16,7 +16,7 @@ A **multi-domain, RAG-powered content generator** — write social posts, produc
 
 Built by **Siddhesh Mishra** as an original project (architecture inspired by, but not copied from, common RAG content tools).
 
-**Live demo:** &lt;add your HF Space URL&gt;
+**Live demo:** https://huggingface.co/spaces/sidmishra6895/ai-content-studio
 
 ![status](https://img.shields.io/badge/status-active-green) ![python](https://img.shields.io/badge/python-3.10+-blue) ![tests](https://img.shields.io/badge/tests-pytest-success)
 
